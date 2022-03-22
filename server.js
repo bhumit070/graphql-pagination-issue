@@ -2,6 +2,8 @@ const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
 const { faker } = require('@faker-js/faker');
+const cors = require('cors')
+
 const users = []
 for (let i = 0; i < 50; i++) {
 	const randomUser = {
@@ -59,6 +61,9 @@ const root = {
 }
 
 const app = express()
+app.use(cors({
+	origin: '*'
+}))
 
 app.use('/graphql', graphqlHTTP({
 	schema,
